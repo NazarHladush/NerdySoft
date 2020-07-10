@@ -77,6 +77,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User activateUserByCode(String activationCode) {
         UserActivationRequest userActivationRequest = userActivationRequestRepository.findByActivationCode(activationCode);
+        if(userActivationRequest == null) {
+            throw new ActivatedException(ErrorMessage.INVALID_ACTIVATION_CODE);
+        }
         User user = userRepository.getUserById(userActivationRequest.getUserId());
         if (user.getStatus() == UserStatus.ACTIVATED)
             throw new ActivatedException(ErrorMessage.ACCOUNT_HAS_ALREADY_ACTIVATED);
