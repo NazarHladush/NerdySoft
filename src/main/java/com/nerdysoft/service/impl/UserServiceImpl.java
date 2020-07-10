@@ -1,6 +1,8 @@
 package com.nerdysoft.service.impl;
 
 import com.nerdysoft.constant.ErrorMessage;
+import com.nerdysoft.dto.UserRegistrationDto;
+import com.nerdysoft.exeption.ActivatedException;
 import com.nerdysoft.exeption.InvalidEmailException;
 import com.nerdysoft.exeption.NotFoundException;
 import com.nerdysoft.mapper.user.UserRegistrationMapper;
@@ -11,6 +13,8 @@ import com.nerdysoft.repository.UserRepository;
 import com.nerdysoft.service.MailSender;
 import com.nerdysoft.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +55,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public boolean registerUser(UserRegistrationDto userRegistrationDto) {
+        this.validateUser(userRegistrationDto);
         User user = userRegistrationMapper.convertToModel(userRegistrationDto);
         user.setRoles(new HashSet<>());
         user.getRoles().add(roleRepository.findByRole("USER"));
@@ -62,7 +67,7 @@ public class UserServiceImpl implements UserService {
         userActivationRequestRepository.save(userActivationRequest);
 
         String message = "Welcome. To activate your account follow link:  "
-                + "http://localhost:8080/registration/activationUser?activationCode="
+                + "http://localhost:8080/api/v1/registration/activationUser?activationCode="
                 + userActivationRequest.getActivationCode();
 
         mailSender.send(user.getEmail(), "Activation Code", message);
@@ -74,9 +79,22 @@ public class UserServiceImpl implements UserService {
         UserActivationRequest userActivationRequest = userActivationRequestRepository.findByActivationCode(activationCode);
         User user = userRepository.getUserById(userActivationRequest.getUserId());
         if (user.getStatus() == UserStatus.ACTIVATED)
-            throw new InvalidEmailException(ErrorMessage.ACCOUNT_HAS_ALREADY_ACTIVATED);
+            throw new ActivatedException(ErrorMessage.ACCOUNT_HAS_ALREADY_ACTIVATED);
         user.setStatus(UserStatus.ACTIVATED);
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public String getEmailFromAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (String) authentication.getPrincipal();
+    }
+
+    private boolean validateUser(UserRegistrationDto userRegistrationDto) {
+        if (userRepository.findByEmail(userRegistrationDto.getEmail()).isPresent()) {
+            throw new InvalidEmailException(ErrorMessage.INVALID_USER_REGISTRATION_DATA);
+        }
+        return true;
     }
 }

@@ -2,7 +2,7 @@ package com.nerdysoft.mapper.user;
 
 import com.nerdysoft.mapper.GeneralMapper;
 import com.nerdysoft.model.User;
-import com.nerdysoft.model.UserRegistrationDto;
+import com.nerdysoft.dto.UserRegistrationDto;
 import org.springframework.stereotype.Component;
 
 @Component

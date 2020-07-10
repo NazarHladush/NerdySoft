@@ -19,6 +19,10 @@ public class UserDetailsImpl implements UserDetails {
         this.user = user;
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> grantedAuthorities = user.getRoles().stream()

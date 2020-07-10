@@ -1,8 +1,9 @@
 package com.nerdysoft.service;
 
+import com.nerdysoft.dto.UserRegistrationDto;
+import com.nerdysoft.exeption.ActivatedException;
 import com.nerdysoft.exeption.NotFoundException;
 import com.nerdysoft.model.User;
-import com.nerdysoft.model.UserRegistrationDto;
 
 import java.util.Optional;
 
@@ -11,5 +12,7 @@ public interface UserService {
 
     boolean registerUser(UserRegistrationDto userRegistrationDto);
 
-    User activateUserByCode(String activationCode);
+    User activateUserByCode(String activationCode) throws ActivatedException;
+
+    String getEmailFromAuthentication();
 }

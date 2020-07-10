@@ -24,10 +24,22 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
     }
 
-    @ExceptionHandler(InvalidEmailException.class)
+    @ExceptionHandler(ActivatedException.class)
     public final ResponseEntity invalidUserRegistrationDataException(WebRequest request){
         ExceptionResponse exceptionResponse = new ExceptionResponse(getErrorAttributes(request));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
+    }
+
+    @ExceptionHandler(InvalidEmailException.class)
+    public final ResponseEntity invalidEmailException(WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(getErrorAttributes(request));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
+    }
+
+    @ExceptionHandler(TokenException.class)
+    public final ResponseEntity tokenException(WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(getErrorAttributes(request));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exceptionResponse);
     }
 
     private Map<String, Object> getErrorAttributes(WebRequest webRequest) {

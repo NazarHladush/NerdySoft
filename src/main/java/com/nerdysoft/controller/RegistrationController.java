@@ -1,6 +1,6 @@
 package com.nerdysoft.controller;
 
-import com.nerdysoft.model.UserRegistrationDto;
+import com.nerdysoft.dto.UserRegistrationDto;
 import com.nerdysoft.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
