@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         userActivationRequestRepository.save(userActivationRequest);
 
         String message = "Welcome. To activate your account follow link:  "
-                + "http://localhost:8080/api/v1/registration/activationUser?activationCode="
+                + "https://nerdysoftjava.herokuapp.com/api/v1/activationUser?activationCode="
                 + userActivationRequest.getActivationCode();
 
         mailSender.send(user.getEmail(), "Activation Code", message);
