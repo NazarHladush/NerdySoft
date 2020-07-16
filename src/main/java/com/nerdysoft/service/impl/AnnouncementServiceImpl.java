@@ -3,7 +3,7 @@ package com.nerdysoft.service.impl;
 import com.nerdysoft.constant.ErrorMessage;
 import com.nerdysoft.dto.AnnouncementDto;
 import com.nerdysoft.dto.SimilarAnnouncementDto;
-import com.nerdysoft.exeption.NotFoundException;
+import com.nerdysoft.exeption.exeptions.NotFoundException;
 import com.nerdysoft.mapper.announcement.AnnouncementMapper;
 import com.nerdysoft.mapper.announcement.SimilarAnnouncementMapper;
 import com.nerdysoft.model.Announcement;

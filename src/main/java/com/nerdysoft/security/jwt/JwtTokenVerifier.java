@@ -2,7 +2,6 @@ package com.nerdysoft.security.jwt;
 
 import com.google.common.base.Strings;
 import com.nerdysoft.config.JwtConfig;
-import com.nerdysoft.exeption.TokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;

@@ -1,4 +1,4 @@
-package com.nerdysoft.exeption;
+package com.nerdysoft.exeption.handler;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

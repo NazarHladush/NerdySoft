@@ -1,6 +1,11 @@
-package com.nerdysoft.exeption;
+package com.nerdysoft.exeption.handler;
 
+import com.nerdysoft.exeption.exeptions.ActivatedException;
+import com.nerdysoft.exeption.exeptions.InvalidEmailException;
+import com.nerdysoft.exeption.exeptions.NotFoundException;
+import com.nerdysoft.exeption.exeptions.TokenException;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +15,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @RestControllerAdvice
 @AllArgsConstructor
@@ -43,6 +50,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private Map<String, Object> getErrorAttributes(WebRequest webRequest) {
-        return new HashMap<>(errorAttributes.getErrorAttributes(webRequest, true));
+        return new HashMap<>(errorAttributes.getErrorAttributes(webRequest, ErrorAttributeOptions
+                .of(ErrorAttributeOptions.Include.MESSAGE)));
     }
 }

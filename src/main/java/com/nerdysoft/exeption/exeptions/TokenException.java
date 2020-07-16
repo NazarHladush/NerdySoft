@@ -1,4 +1,4 @@
-package com.nerdysoft.exeption;
+package com.nerdysoft.exeption.exeptions;
 
 public class TokenException extends RuntimeException{
     public TokenException(String message) {

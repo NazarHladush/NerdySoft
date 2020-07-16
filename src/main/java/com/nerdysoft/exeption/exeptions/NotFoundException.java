@@ -1,4 +1,4 @@
-package com.nerdysoft.exeption;
+package com.nerdysoft.exeption.exeptions;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {

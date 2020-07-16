@@ -2,9 +2,9 @@ package com.nerdysoft.service.impl;
 
 import com.nerdysoft.constant.ErrorMessage;
 import com.nerdysoft.dto.UserRegistrationDto;
-import com.nerdysoft.exeption.ActivatedException;
-import com.nerdysoft.exeption.InvalidEmailException;
-import com.nerdysoft.exeption.NotFoundException;
+import com.nerdysoft.exeption.exeptions.ActivatedException;
+import com.nerdysoft.exeption.exeptions.InvalidEmailException;
+import com.nerdysoft.exeption.exeptions.NotFoundException;
 import com.nerdysoft.mapper.user.UserRegistrationMapper;
 import com.nerdysoft.model.*;
 import com.nerdysoft.repository.RoleRepository;

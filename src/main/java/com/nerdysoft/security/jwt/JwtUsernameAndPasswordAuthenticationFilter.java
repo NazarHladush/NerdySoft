@@ -2,7 +2,6 @@ package com.nerdysoft.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nerdysoft.config.JwtConfig;
-import com.nerdysoft.exeption.NotFoundException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -58,6 +57,13 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         return authenticate;
 
 
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.setHeader("Content-Type", "application/json");
+        response.getOutputStream().print("{\"errorMessage\":\"You can't use this!\"}");
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.nerdysoft.service;
 
 import com.nerdysoft.dto.UserRegistrationDto;
-import com.nerdysoft.exeption.ActivatedException;
-import com.nerdysoft.exeption.NotFoundException;
+import com.nerdysoft.exeption.exeptions.ActivatedException;
+import com.nerdysoft.exeption.exeptions.NotFoundException;
 import com.nerdysoft.model.User;
 
 import java.util.Optional;
